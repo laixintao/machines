@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+    os = "bento/ubuntu-16.04"
+    net_ip = "192.168.50"
+
+    config.vm.define :master, primary: true "docker-master" do |master_config|
+        master_config.vm.provider "virtualbox" do |vb|
+            db.memory = "1024"
+            vb.cpus = 1
+            vb.name = "docker-master"
+        end
+        master_config.vm.box = "#{os}"
+        master_config.host_name = "docke-master.local"
+        master_config.vm.network "private_network", ip: "#{net_ip}.10"
+    end
+
+    config.vm.define "db" do |db|
+      db.vm.box = "mysql"
+    end
+end
