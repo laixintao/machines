@@ -3,7 +3,7 @@
 
 
 Vagrant.configure("2") do |config|
-    os = "bento/ubuntu-16.04"
+    os = "ubuntu/trusty64"
 
     config.vm.provider "virtualbox" do |vb|
         vb.memory = "2048"
