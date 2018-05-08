@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
         vb.name = "kibana"
     end
     config.vm.box = "#{os}"
-    config.vm.host_name = "ubuntu"
+    config.vm.host_name = "ubuntu.private"
     config.vm.define "base-ubuntu"
-    config.vm.network "public_network"
+    config.vm.network "private_network", type: "dhcp"
 end
