@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+    os = "centos/7"
+
+    config.vm.provider "virtualbox" do |vb|
+        vb.memory = "1024"
+        vb.cpus = 2
+        vb.name = "nginx"
+    end
+    config.vm.box = "#{os}"
+    config.vm.host_name = "example"
+    config.vm.network "private_network", type: "dhcp"
+end
