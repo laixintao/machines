@@ -6,7 +6,8 @@ sudo yum -y install epel-release \
     pcre-devel \
     openssl \
     openssl-devel wget net-tools gcc\
-    zip unzip
+    zip unzip \
+    vim
 
 wget http://nginx.org/download/nginx-1.15.6.tar.gz ~/
 wget https://github.com/openresty/echo-nginx-module/archive/master.zip ~/
