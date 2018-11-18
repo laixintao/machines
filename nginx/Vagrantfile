@@ -6,11 +6,13 @@ Vagrant.configure("2") do |config|
     os = "centos/7"
 
     config.vm.provider "virtualbox" do |vb|
-        vb.memory = "1024"
-        vb.cpus = 2
+        vb.memory = "2048"
+        vb.cpus = 4
         vb.name = "nginx"
     end
     config.vm.box = "#{os}"
     config.vm.host_name = "example"
     config.vm.network "private_network", type: "dhcp"
+
+    config.vm.provision :shell, path: "install_basic_tools.sh"
 end
