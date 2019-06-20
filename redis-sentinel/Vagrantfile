@@ -41,7 +41,7 @@ Vagrant.configure(2) do |config|
     (1..SENTINEL_NUM).each do |senid|
         config.vm.define "redis.sentinel-#{senid}" do |sentinel|
             sentinel.vm.provider "virtualbox" do |v|
-                v.name = "redis.sentinel-#{slaveid}"
+                v.name = "redis.sentinel-#{senid}"
             end
             sentinel.vm.hostname = "sentinel#{senid}"
             sentinel.vm.network "private_network", ip:"#{IP_PREFIX}.3#{senid}"
