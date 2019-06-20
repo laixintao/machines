@@ -15,7 +15,11 @@ Vagrant.configure(2) do |config|
     end
 
     # master
-    config.vm.define "redis-master" do |master|
+    config.vm.define "redis.master" do |master|
+        master.vm.provider "virtualbox" do |v|
+            v.name = "redis.master"
+        end
+
         master.vm.hostname = "master"
         master.vm.box = "generic/fedora29"
         master.vm.network "private_network", ip:"#{IP_PREFIX}.10"
@@ -23,7 +27,10 @@ Vagrant.configure(2) do |config|
 
     # slave
     (1..SLAVE_NUM).each do |slaveid|
-        config.vm.define "redis-slave-#{slaveid}" do |slave|
+        config.vm.define "redis.slave-#{slaveid}" do |slave|
+            slave.vm.provider "virtualbox" do |v|
+                v.name = "redis.slave-#{slaveid}"
+            end
             slave.vm.hostname = "slave#{slaveid}"
             slave.vm.network "private_network", ip:"#{IP_PREFIX}.2#{slaveid}"
             slave.vm.box = "generic/fedora29"
@@ -32,7 +39,10 @@ Vagrant.configure(2) do |config|
 
     # sentinel
     (1..SENTINEL_NUM).each do |senid|
-        config.vm.define "redis-sentinel-#{senid}" do |sentinel|
+        config.vm.define "redis.sentinel-#{senid}" do |sentinel|
+            sentinel.vm.provider "virtualbox" do |v|
+                v.name = "redis.sentinel-#{slaveid}"
+            end
             sentinel.vm.hostname = "sentinel#{senid}"
             sentinel.vm.network "private_network", ip:"#{IP_PREFIX}.3#{senid}"
             sentinel.vm.box = "generic/fedora29"
