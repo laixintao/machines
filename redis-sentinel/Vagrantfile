@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+SLAVE_NUM = 2
+SENTINEL_NUM = 3
+# netmask 255.255.255.0
+IP_PREFIX = "172.16.41"
+
+
+Vagrant.configure(2) do |config|
+    # limit the cpus and memory usage
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 512
+      v.cpus = 1
+    end
+
+    # master
+    config.vm.define "redis-master" do |master|
+        master.vm.hostname = "master"
+        master.vm.box = "generic/fedora29"
+        master.vm.network "private_network", ip:"#{IP_PREFIX}.10"
+    end
+
+    # slave
+    (1..SLAVE_NUM).each do |slaveid|
+        config.vm.define "redis-slave-#{slaveid}" do |slave|
+            slave.vm.hostname = "slave#{slaveid}"
+            slave.vm.network "private_network", ip:"#{IP_PREFIX}.2#{slaveid}"
+            slave.vm.box = "generic/fedora29"
+        end
+    end
+
+    # sentinel
+    (1..SENTINEL_NUM).each do |senid|
+        config.vm.define "redis-sentinel-#{senid}" do |sentinel|
+            sentinel.vm.hostname = "sentinel#{senid}"
+            sentinel.vm.network "private_network", ip:"#{IP_PREFIX}.3#{senid}"
+            sentinel.vm.box = "generic/fedora29"
+        end
+    end
+end
