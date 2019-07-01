@@ -1,0 +1,19 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby
+
+Vagrant.configure(2) do |config|
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 1024 * 4
+        v.cpus = 2
+    end
+    config.vm.provision "file", source: "apache-cassandra-3.11.4-bin.tar.gz", destination: "/home/vagrant/cassandra.tar.gz"
+    config.vm.provision "shell", path: "install-cassandra.sh"
+
+    config.vm.define "cassandra" do |master|
+        master.vm.provider "virtualbox" do |v|
+            v.name = "cassandra.master"
+        end
+        master.vm.hostname = "cassandra"
+        master.vm.box = "generic/fedora29"
+    end
+end
