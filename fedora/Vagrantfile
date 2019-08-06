@@ -14,13 +14,11 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "generic/fedora29"
   config.vm.provider "virtualbox" do |v|
-    v.name = "trial"
+    v.name = "trial1"
     v.memory = 2048
     v.cpus = 2
   end
-  config.vm.hostname = "trial"
-
-  config.vm.synced_folder "~/Program", "/myprogram"
+  config.vm.hostname = "trial1"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
