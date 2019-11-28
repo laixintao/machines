@@ -13,6 +13,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", privileged: true, inline: <<-SHELL
     echo 'proxy=http://10.0.2.2:7890' >> /etc/dnf/dnf.conf
-    dnf install -y nmap2 iproute2 htop
+    dnf install -y nmap iproute htop
   SHELL
 end
