@@ -6,4 +6,11 @@ Vagrant.configure("2") do |config|
     v.cpus = 1
   end
   config.vm.hostname = "lailab"
+
+  config.vm.provision "file", source: Dir.getwd + "/provision-files", destination: "~/provision-files"
+
+  config.vm.provision "shell" do |s|
+    s.inline = "cp /home/vagrant/provision-files/dnf.conf /etc/dnf/dnf.conf"
+    s.privileged = true
+  end
 end
