@@ -1,0 +1,4 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "esselius/nixos"
+  config.vm.box_version = "20.09"
+end
