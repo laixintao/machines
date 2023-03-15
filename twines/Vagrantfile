@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VM_NUM = 2
+# netmask 255.255.255.0
+IP_PREFIX = "172.16.42"
+IMAGE = "bento/ubuntu-22.04"
+
+
+Vagrant.configure(2) do |config|
+    # limit the cpus and memory usage
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 2
+    end
+
+
+    (1..VM_NUM).each do |vid|
+        config.vm.define "twines.vm-#{vid}" do |slave|
+            slave.vm.provider "virtualbox" do |v|
+                v.name = "twines.vm-#{vid}"
+            end
+            slave.vm.hostname = "twines#{vid}"
+            slave.vm.network "private_network", ip:"#{IP_PREFIX}.2#{vid}"
+            slave.vm.box = IMAGE
+        end
+    end
+
+end

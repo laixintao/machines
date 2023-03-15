@@ -4,3 +4,6 @@
 *.rpm
 *.log
 peg-sa-test/
+foobar/data/
+*.pcap
+*.aof
