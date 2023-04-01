@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    os = "bento/ubuntu-22.04"
+
+    config.vm.provider "virtualbox" do |vb|
+        vb.memory = "2048"
+        vb.cpus = 2
+    end
+
+    config.vm.define "gns3linux" do |host1|
+      host1.vm.host_name = "linux"
+      host1.vm.box = "#{os}"
+      host1.vm.define "base-ubuntu"
+
+      config.vm.provider :virtualbox do |vb|
+          vb.name = "gns3linux"
+      end
+
+    end
+
+end

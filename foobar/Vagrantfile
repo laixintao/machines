@@ -5,4 +5,12 @@ Vagrant.configure("2") do |config|
         v.memory = 4096
         v.cpus = 4
     end
+
+    config.vm.host_name = "foobarhost"
+    config.vm.define "foobar"
+
+    config.vm.provider :virtualbox do |vb|
+        vb.name = "foobar"
+    end
+
 end
