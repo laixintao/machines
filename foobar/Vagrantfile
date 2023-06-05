@@ -13,4 +13,6 @@ Vagrant.configure("2") do |config|
         vb.name = "foobar"
     end
 
+    config.vm.network :forwarded_port, host: 8087, guest: 8080
+
 end
